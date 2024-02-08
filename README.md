@@ -1,4 +1,4 @@
-# api-catalog .well-known URI
+# The 'api-catalog' well-known URI
 
 This is the working area for the IETF [HTTPAPI Working Group](https://datatracker.ietf.org/wg/httpapi/documents/) Internet-Draft, "api-catalog: a well-known URI to help discovery of APIs".
 
