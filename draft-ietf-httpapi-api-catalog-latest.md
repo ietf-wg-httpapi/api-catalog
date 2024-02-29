@@ -1,5 +1,5 @@
 ---
-title: "api-catalog: a well-known URI to help discovery of APIs"
+title: "api-catalog: a well-known URI and link relation to help discovery of APIs"
 abbrev: api-catalog well-known URI
 docname: draft-ietf-httpapi-api-catalog-latest
 date: {DATE}
@@ -77,18 +77,20 @@ informative:
 
 --- abstract
 
-This document defines the "api-catalog" well-known URI. It is intended to facilitate automated discovery and usage of the APIs published by a given organisation or individual.
+This document defines the "api-catalog" well-known URI and link relation. It is intended to facilitate automated discovery and usage of the APIs published by a given organisation or individual.
 
 
 --- middle
 
 # Introduction {#introduction}
 
-An organisation or individual may publish Application Programming Interfaces (APIs) to encourage requests for interaction from external parties. Such APIs must be discovered before they may be used - i.e., the external party needs to know what APIs a given publisher exposes, their purpose, any policies for usage, and the endpoint to interact with each APIs. To facilitate automated discovery of this information, and automated usage of the APIs, this document proposes a well-known URI, 'api-catalog', as a location where a Publisher's API endpoints are described in an API catalog document.
+An organisation or individual may publish Application Programming Interfaces (APIs) to encourage requests for interaction from external parties. Such APIs must be discovered before they may be used - i.e., the external party needs to know what APIs a given publisher exposes, their purpose, any policies for usage, and the endpoint to interact with each APIs. To facilitate automated discovery of this information, and automated usage of the APIs, this document proposes:
+- a well-known URI, 'api-catalog', as a reference to the URI of an API Catalog document describing a Publisher's API endpoints.
+- a link relation, 'api-catalog', of which the target resource is the Publisher's API Catalog document.
 
 ## Terminology {#terminology}
 
-* 'Publisher' - an organisation, company or individual that publishes one or more APIs for usage by external third parties.
+- 'Publisher' - an organisation, company or individual that publishes one or more APIs for usage by external third parties.
                     
 ## Goals and non-goals {#goals}
 
@@ -105,11 +107,20 @@ described in BCP 14 {{!RFC2119}} {{!RFC8174}} when, and only when, they
 appear in all capitals, as shown here.
 
 # Using the 'api-catalog' well-known URI {#usage}
-The api-catalog well-known URI is intended for HTTP(S) servers that publish APIs. As the key aim is  to facilitate their discovery and usage, a Publisher supporting this URI:
+The api-catalog well-known URI is intended for HTTP(S) servers that publish APIs. As the key aim is to facilitate discovery and usage of APIs, a Publisher supporting this URI:
 
-* SHOULD host the /.well-known/api-catalog URI at a predictable location. For example as companies typically own a .com TLD, a predictable location for the company 'example' would be   https://www.example.com/.well-known/api-catalog
-* SHALL resolve an HTTP(S) GET request to /.well-known/api-catalog and return an API catalog document, as described in {{API-CATALOG}}
+* SHOULD publish the /.well-known/api-catalog URI at a predictable location. For example as companies typically own a .com TLD, a predictable location for the company 'example' would be https://www.example.com/.well-known/api-catalog
+* SHALL resolve an HTTP(S) GET request to /.well-known/api-catalog and return an API catalog document ( as described in {{API-CATALOG}} ). 
 * SHOULD resolve an HTTP(S) HEAD request to /.well-known/api-catalog with a response including a Link header with the relation(s) defined in {{LINK-RELATION}}
+
+The location (URL) of the API Catalog document is decided by the Publisher: the./well-known/api-catalog URI provides a convenient reference to that URL. 
+
+
+# Link relations {#LINK-RELATION}
+
+* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs of which the context resource is a member. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher.
+
+* "item" {{!RFC9264}}. When used in an API Catalog document, the 'item' link relation identifies a target resource that represents an API that is a member of the API Catalog.
 
 # Accounting for APIs distributed across multiple domains {#multiple_domains}
 
@@ -117,13 +128,14 @@ A Publisher ('example') may have their APIs hosted across multiple domains that 
                 
 To account for this scenario, it is recommended that:
 
-* the Publisher publish the api-catalog well-known URI at a predictable location, as described above.
-* the Publisher also publish the api-catalog well-known URI at each of their API domains e.g. apis.example.com/.well-known/api-catalog, developer.example.com/.well-known/api-catalog etc. 
-* only one of these locations needs to host the canonical API Catalog document. The other locations SHOULD redirect any requests they receive for /.well-known/api-catalog to that primary location, using HTTP Status Code 308 Permanent Redirect {{!RFC9110}}.
+* the Publisher publish the api-catalog well-known URI at a predictable location, e.g. example.com/.well-known/api-catalog .
+* the Publisher also publish the api-catalog well-known URI at each of their API domains e.g. apis.example.com/.well-known/api-catalog, developer.example.net/.well-known/api-catalog etc. 
+* an HTTP GET request to any of these URIs should return the same result, namely, the API Catalog document. 
+* Since the physical location (URL) of the API Catalog document is decided by the Publisher, and may change, it is RECOMMENDED that the Publisher choose one of their instances of .well-known/api-catalog as a canonical reference to the location of the latest API Catalog. The Publisher's other instances of ./well-known/api-catalog SHOULD redirect to this canonical instance of /.well-known/api-catalog , using HTTP Status Code 308 Permanent Redirect {{!RFC9110}}, to ensure the latest API Catalog is returned.
 
-As illustration, if the Publisher's primary API portal is apis.example.com, then apis.example.com/.well-known/api-catalog should be the location to host the API Catalog document. If the Publisher is also the domain authority for example.net, which also hosts a selection of their APIs, then a request to www.example.net/.well-known/api-catalog SHOULD return a redirect as follows.
+As illustration, if the Publisher's primary API portal is apis.example.com, then apis.example.com/.well-known/api-catalog should resolve to the location of the latest API Catalog document. If the Publisher is also the domain authority for example.net, which also hosts a selection of their APIs, then a request to www.example.net/.well-known/api-catalog SHOULD return a redirect as follows.
 
-Clienr request:
+Client request:
 
 ~~~ http-message
 GET /.well-known/api-catalog HTTP/1.1
@@ -146,13 +158,11 @@ Content-Length: 356
       <meta http-equiv="refresh" content="0; url=https://apis.example.com/.well-known/api-catalog">
     </head>
     <body>
-      <p>The document has been moved to <a href=https://apis.example.com/.well-known/api-catalog>https://apis.example.com/.well-known/api-catalog</a>.</p>
+      <p>Redirected to:  <a href=https://apis.example.com/.well-known/api-catalog>https://apis.example.com/.well-known/api-catalog</a>.</p>
     </body>
   </html>
 
 ~~~
-
-
 
 
 # Internal use of api-catalog for private APIs {#INTERNAL-USE}
@@ -161,7 +171,7 @@ A Publisher may wish to use the api-catalog well-known URI on their internal net
 
 # The API Catalog {#API-CATALOG}    
 
-The API Catalog is a document listing hyperlinks to a Publisher's APIs.
+The API Catalog is a document listing hyperlinks to a Publisher's APIs.  The Publisher may host this API Catalog document at any URI(s) they choose. Hence the API Catalog document URI of example.com/my_api_catalog.json can be requested directly, or via a request to example.com/.well-known/api-catalog, which the Publisher will resolve to example.com/my_api_catalog.
             
 There is no mandated format for the API Catalog document: the Publisher is free to choose any format that supports the automated discovery, and machine (and human) usage of their APIs. However, it is RECOMMENDED to use a linkset {{!RFC9264}} of API endpoints (see {{api-catalog-example-linkset}} for an example).
             
@@ -176,13 +186,7 @@ Some suitable API Catalog document formats include:
 * A Hypertext Application Language document [HAL]
 * An extension to the Schema.org WebAPI type [WebAPIext]
             
-Appendix A includes example API Catalog documents based on the linkset format.   
-
-
-# Link relations {#LINK-RELATION}
-
-* "item" {{!RFC9264}}. When used in an API Catalog document, the 'item' link relation identifies a target resource that represents a API that is a member of the API Catalog.
-* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs of which the context resource is a member.     
+Appendix A includes example API Catalog documents based on the linkset format.        
 
 # Conformance to RFC8615  {#CONFORM-RFC8615}
 
@@ -331,6 +335,9 @@ Content-Type: application/linkset+json
 ## Using Linkset with bookmarks {#api-catalog-example-linkset-bookmarks}
 
 This example also uses the linkset format {{!RFC9264}}, listing the API endpoints in an array of bookmarks. Each link shares the same context (the API Catalog) and "item" {{!RFC9264}} link relation (to indicate they are an item in the catalog).The intent is that by following a bookmark link, a machine-client can discover the purpose and usage of each API, hence the document targeted by the bookmark link should support this.
+
+Note in the example below, the context anchor is example/com/.well-known/api-catalog, however as explained above the  context anchor may be any other URI at which the api-catalog is available. 
+
 
 Client request:
 
