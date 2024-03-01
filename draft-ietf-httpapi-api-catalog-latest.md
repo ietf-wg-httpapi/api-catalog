@@ -118,7 +118,29 @@ The location (URL) of the API Catalog document is decided by the Publisher: the.
 
 # Link relations {#LINK-RELATION}
 
-* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs of which the context resource is a member. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher.
+* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs available from the Publisher of the context resource. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher.
+
+For example, the Publisher 'example.com' could include the api-catalog link relation in the HTTP header and/or content payload when responding to a request to https://example.com : 
+
+~~~ http-message
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Location: http\://www.example.com/
+Link: </my_api_catalog.json.>; rel=api-catalog
+Content-Length: 356
+
+<!DOCTYPE HTML>
+  <html>
+    <head>
+      <title>Welcome to Example Publisher</title>
+    </head>
+    <body>
+      <p/><a href="my_api_catalog.json" rel="api-catalog">Example Publisher's APIs</a>.</p>
+      <p>(remainder of content)</p>
+    </body>
+  </html>
+
+~~~
 
 * "item" {{!RFC9264}}. When used in an API Catalog document, the 'item' link relation identifies a target resource that represents an API that is a member of the API Catalog.
 
