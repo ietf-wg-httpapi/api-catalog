@@ -85,6 +85,7 @@ This document defines the "api-catalog" well-known URI and link relation. It is 
 # Introduction {#introduction}
 
 An organisation or individual may publish Application Programming Interfaces (APIs) to encourage requests for interaction from external parties. Such APIs must be discovered before they may be used - i.e., the external party needs to know what APIs a given publisher exposes, their purpose, any policies for usage, and the endpoint to interact with each APIs. To facilitate automated discovery of this information, and automated usage of the APIs, this document proposes:
+
 - a well-known URI, 'api-catalog', as a reference to the URI of an API Catalog document describing a Publisher's API endpoints.
 - a link relation, 'api-catalog', of which the target resource is the Publisher's API Catalog document.
 
@@ -118,9 +119,7 @@ The location (URL) of the API Catalog document is decided by the Publisher: the.
 
 # Link relations {#LINK-RELATION}
 
-* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs available from the Publisher of the context resource. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher.
-
-For example, the Publisher 'example.com' could include the api-catalog link relation in the HTTP header and/or content payload when responding to a request to https://example.com : 
+* "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs available from the Publisher of the context resource. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher. For example, the Publisher 'example.com' could include the api-catalog link relation in the HTTP header and/or content payload when responding to a request to https://example.com : 
 
 ~~~ http-message
 HTTP/1.1 200 OK
@@ -201,7 +200,7 @@ The API Catalog document MUST include hyperlinks to API endpoints, and is RECOMM
             
 Some suitable API Catalog document formats include: 
 
-* (RECOMMENDED) A linkset {{!RFC9264}} of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (sectionn 5 of {{!RFC9264}}) with the Profile URI 'https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog' to indicate the linkset is representing an API Catalog document as defined above.
+* (RECOMMENDED) A linkset {{!RFC9264}} of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with the Profile URI 'https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog' to indicate the linkset is representing an API Catalog document as defined above.
 * An APIs.json document [APIsjson]
 * API bookmarks that represent an API entry-point URI, which may be followed to discover purpose and usage
 * A RESTDesc semantic description for hypermedia APIs [RESTdesc]
@@ -388,7 +387,8 @@ Server response:
 HTTP/1.1 200 OK
 Date: Mon, 01 Jun 2023 00:00:01 GMT
 Server: Apache-Coyote/1.1
-Content-Type: application/linkset+json
+Content-Type: application/linkset+json;
+    profile="https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog"
 ~~~
 
 ~~~
