@@ -200,7 +200,7 @@ The API Catalog document MUST include hyperlinks to API endpoints, and is RECOMM
             
 Some suitable API Catalog document formats include: 
 
-* (RECOMMENDED) A linkset {{!RFC9264}} of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with the Profile URI 'https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog' to indicate the linkset is representing an API Catalog document as defined above.
+* (RECOMMENDED) A linkset {{!RFC9264}} of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with the Profile URI 'THIS-RFC-URL' to indicate the linkset is representing an API Catalog document as defined above.
 * An APIs.json document [APIsjson]
 * API bookmarks that represent an API entry-point URI, which may be followed to discover purpose and usage
 * A RESTDesc semantic description for hypermedia APIs [RESTdesc]
@@ -233,7 +233,7 @@ This specification registers the "api-catalog" well-known URI in the Well-Known 
 
 URI suffix: api-catalog
 
-Specification document(s):  draft-ietf-httpapi-api-catalog-02
+Specification document(s):  THIS-RFC
 
 Related information:  The "api-catalog" documents obtained from the same host using the HTTP and HTTPS protocols (using default ports) MUST be identical.
 
@@ -243,19 +243,19 @@ This specification registers the "api-catalog" link relation by following the pr
 
 * Relation Name:  api-catalog
 * Description:  Identifies a catalog of APIs published by the context Publisher.
-* Reference:  draft-ietf-httpapi-api-catalog-02
+* Reference:  THIS-RFC
 
 ## the api-catalog Profile URI
 
- This specification registers "https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog" in the "Profile URIs" registry according to {{!RFC7284}}.
+ This specification registers "THIS-RFC-URL" in the "Profile URIs" registry according to {{!RFC7284}}.
 
-   o  Profile URI: https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog
+   o  Profile URI: THIS-RFC-URL
 
    o  Common Name: API Catalog
 
    o  Description: A profile URI to request or signal a linkset representing an API Catalog.
 
-   o  Reference: draft-ietf-httpapi-api-catalog-02
+   o  Reference: THIS-RFC
 
 # Security Considerations {#security}
 
@@ -293,7 +293,7 @@ HTTP/1.1 200 OK
 Date: Mon, 01 Jun 2023 00:00:01 GMT
 Server: Apache-Coyote/1.1
 Content-Type: application/linkset+json;
-    profile="https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog"
+    profile="THIS-RFC-URL"
 ~~~
 
 ~~~
@@ -388,7 +388,7 @@ HTTP/1.1 200 OK
 Date: Mon, 01 Jun 2023 00:00:01 GMT
 Server: Apache-Coyote/1.1
 Content-Type: application/linkset+json;
-    profile="https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog"
+    profile="THIS-RFC-URL"
 ~~~
 
 ~~~
