@@ -124,8 +124,8 @@ The location (URL) of the API Catalog document is decided by the Publisher: the.
 ~~~ http-message
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=UTF-8
-Location: http\://www.example.com/
-Link: </my_api_catalog.json.>; rel=api-catalog
+Location: http://www.example.com/
+Link: </my_api_catalog.json>; rel=api-catalog
 Content-Length: 356
 
 <!DOCTYPE HTML>
@@ -134,7 +134,7 @@ Content-Length: 356
       <title>Welcome to Example Publisher</title>
     </head>
     <body>
-      <p/><a href="my_api_catalog.json" rel="api-catalog">Example Publisher's APIs</a>.</p>
+      <p><a href="my_api_catalog.json" rel="api-catalog">Example Publisher's APIs</a>.</p>
       <p>(remainder of content)</p>
     </body>
   </html>
@@ -169,7 +169,7 @@ Server response:
 ~~~ http-message
 HTTP/1.1 308 Permanent Redirect
 Content-Type: text/html; charset=UTF-8
-Location: http\://apis.example.com/.well-known/api-catalog
+Location: http://apis.example.com/.well-known/api-catalog
 Content-Length: 356
 
 <!DOCTYPE HTML>
@@ -229,13 +229,13 @@ See {{IANA}} considerations below.
 
 ## The api-catalog well-known URI
 
-This specification registers the "api-catalog" well-known URI in the Well-Known URI Registry as defined by {{!RFC6415}}.
+This specification registers the "api-catalog" well-known URI in the Well-Known URI Registry as defined by {{!RFC8615}}.
 
-URI suffix: api-catalog
-
-Specification document(s):  draft-ietf-httpapi-api-catalog-02
-
-Related information:  The "api-catalog" documents obtained from the same host using the HTTP and HTTPS protocols (using default ports) MUST be identical.
+* URI suffix: api-catalog
+* Change Controller: IETF
+* Specification document(s):  draft-ietf-httpapi-api-catalog-02
+* Status: permanent
+* Related information:  The "api-catalog" documents obtained from the same host using the HTTP and HTTPS protocols (using default ports) MUST be identical.
 
 ## The api-catalog link relation
 
@@ -249,13 +249,10 @@ This specification registers the "api-catalog" link relation by following the pr
 
  This specification registers "https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog" in the "Profile URIs" registry according to {{!RFC7284}}.
 
-   o  Profile URI: https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog
-
-   o  Common Name: API Catalog
-
-   o  Description: A profile URI to request or signal a linkset representing an API Catalog.
-
-   o  Reference: draft-ietf-httpapi-api-catalog-02
+* Profile URI: https://datatracker.ietf.org/doc/draft-ietf-httpapi-api-catalog
+* Common Name: API Catalog
+* Description: A profile URI to request or signal a linkset representing an API Catalog.
+* Reference: draft-ietf-httpapi-api-catalog-02
 
 # Security Considerations {#security}
 
@@ -396,7 +393,7 @@ Content-Type: application/linkset+json;
   { "anchor": "https://example.com/.well-known/api-catalog",
     "item": [
       {"href": "https://developer.example.com/apis/foo_api"},
-      {"href": "https://developer.example.com/apis/bar_api"}
+      {"href": "https://developer.example.com/apis/bar_api"},
       {"href": "https://developer.example.com/apis/cantona_api"}
     ]
   }
