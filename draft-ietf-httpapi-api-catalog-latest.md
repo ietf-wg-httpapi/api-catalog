@@ -1,7 +1,7 @@
 ---
 title: "api-catalog: a well-known URI and link relation to help discovery of APIs"
 abbrev: api-catalog well-known URI
-docname: draft-ietf-httpapi-api-catalog-02
+docname: draft-ietf-httpapi-api-catalog-03
 date: {DATE}
 area: IETF
 category: std
@@ -247,7 +247,7 @@ This specification registers the "api-catalog" link relation by following the pr
 
 ## the api-catalog Profile URI
 
- This specification registers "THIS-RFC-URL" in the "Profile URIs" registry according to {{!RFC7284}}.
+ This specification registers "THIS-RFC-URL" in the "Profile URIs" registry according to {{?RFC7284}}.
 
 * Profile URI: THIS-RFC-URL
 * Common Name: API Catalog
