@@ -114,7 +114,6 @@ The api-catalog well-known URI is intended for HTTP(S) servers that publish APIs
 
 The location (URL) of the API Catalog document is decided by the Publisher: the ./well-known/api-catalog URI provides a convenient reference to that URL. 
 
-
 # Link relations {#LINK-RELATION}
 
 * "api-catalog": the 'api-catalog' link relation identifies a target resource that represents a list of APIs available from the Publisher of the context resource. The target resource URI may be ./well-known/api-catalog , or any other URI chosen by the Publisher. For example, the Publisher 'example.com' could include the api-catalog link relation in the HTTP header and/or content payload when responding to a request to https://example.com : 
@@ -193,19 +192,21 @@ A Publisher may wish to use the api-catalog well-known URI on their internal net
 The API Catalog is a document listing hyperlinks to a Publisher's APIs. The Publisher may host this API Catalog document at any URI(s) they choose. Hence the API Catalog document URI of example.com/my_api_catalog.json can be requested directly, or via a request to example.com/.well-known/api-catalog, which the Publisher will resolve to example.com/my_api_catalog.
             
 The Publisher MUST publish the API Catalog document in the Linkset format application/linkset+json (section 4.2 of {{!RFC9264}}). In addition, the Publisher MAY make additional formats available via content negotiation (section 5.3 of {{!HTTP}}) to their /.well-known/api-catalog location. A non-exhaustive list of such formats that support the automated discovery, and machine (and human) usage of a Publisher's APIs, is listed below.
-            
+
 The API Catalog document MUST include hyperlinks to API endpoints, and is RECOMMENDED to include useful metadata, such as usage policies, API version information, links to the OpenAPI Specification [OAS] definitions for each API, etc. . If the Publisher does not include these metadata directly in the API Catalog document, they SHOULD make that metadata available at the API endpoint URIs they have listed (see {{api-catalog-example-linkset-bookmarks}} for an example).
             
 Some suitable API Catalog document formats include: 
 
-* (RECOMMENDED) A linkset {{!RFC9264}} of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL' to indicate the linkset is representing an API Catalog document as defined above.
+* (RECOMMENDED) A linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of API endpoints and information to facilitate API usage. The linkset SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL' to indicate the linkset is representing an API Catalog document as defined above. Appendix A includes example API Catalog documents based on the linkset format. 
 * An APIs.json document [APIsjson]
 * API bookmarks that represent an API entry-point URI, which may be followed to discover purpose and usage
 * A RESTDesc semantic description for hypermedia APIs [RESTdesc]
 * A Hypertext Application Language document [HAL]
-* An extension to the Schema.org WebAPI type [WebAPIext]
-            
-Appendix A includes example API Catalog documents based on the linkset format.        
+* An extension to the Schema.org WebAPI type [WebAPIext].
+
+If a Publisher already lists their APIs in a format other than linkset but wish to utiise the /.well-known/api-catalog URI, then:
+* they MUST also implement a linkset with, at minimum, hyperlinks to API endpoints - see the exmple of  {{<<api-catalog-example-linkset-bookmarks}} in Appendix A.
+* they MAY support content negotiation at the /.well-known/api-catalog URI to allow their existing format to be returned.
 
 # Conformance to RFC8615  {#CONFORM-RFC8615}
 
@@ -267,7 +268,7 @@ For the internal/private APIs scenario: the Publisher SHOULD take steps to ensur
 
 --- back
 
-# Example API Catalog document {#api-catalog-example-linkset}
+# Example API Catalog documents {#api-catalog-example-linkset}
 
 This section is informative, and provides and example of an API Catalog document using the RECOMMENDED linkset format.
 
