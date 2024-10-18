@@ -1,7 +1,7 @@
 ---
 title: "api-catalog: a well-known URI and link relation to help discovery of APIs"
 abbrev: api-catalog well-known URI
-docname: draft-ietf-httpapi-api-catalog-04
+docname: draft-ietf-httpapi-api-catalog-05
 date: {DATE}
 area: IETF
 category: std
