@@ -113,7 +113,7 @@ In this document, "API" means the specification resources required for an extern
 
 The api-catalog well-known URI is intended for HTTP(S) servers that publish APIs. 
 
-* The API Catalog MUST be named "api-catalog" in a well-known location as described by [RFC8615].
+* The API Catalog MUST be named "api-catalog" in a well-known location as described by {{WELL-KNOWN}}.
 * The location of the API Catalog document is decided by the Publisher: the ./well-known/api-catalog URI provides a convenient reference to that location. 
 
 A Publisher supporting this URI:
@@ -186,7 +186,7 @@ If a Publisher already lists their APIs in a format other than linkset but wish 
 
 # Conformance to RFC8615  {#CONFORM-RFC8615}
 
-The requirements in section 3 of {{!RFC8615}} for defining Well-Known Uniform Resource Identifiers are met as follows:
+The requirements in section 3 of {{WELL-KNOWN}} for defining Well-Known Uniform Resource Identifiers are met as follows:
 
 ## Path suffix
 
@@ -205,7 +205,7 @@ See {{IANA}} considerations below.
 
 ## The api-catalog well-known URI
 
-This specification registers the "api-catalog" well-known URI in the Well-Known URI Registry as defined by {{!RFC8615}}.
+This specification registers the "api-catalog" well-known URI in the Well-Known URI Registry as defined by {{WELL-KNOWN}}.
 
 * URI suffix: api-catalog
 * Change Controller: IETF
@@ -214,7 +214,7 @@ This specification registers the "api-catalog" well-known URI in the Well-Known 
 
 ## The api-catalog link relation
 
-This specification registers the "api-catalog" link relation by following the procedures per section 2.1.1.1 of {{!RFC8288}}
+This specification registers the "api-catalog" link relation by following the procedures per section 2.1.1.1 of {{WEB-LINKING}}
 
 * Relation Name:  api-catalog
 * Description:  The link target identifies a catalog of the APIs published by the owner of the link target domain.
@@ -234,7 +234,7 @@ RFC Editor's Note: IANA is kindly requested to replace all instances of THIS-RFC
 # Security Considerations {#security}
 
 For all scenarios: 
-* The Publisher SHOULD take into account the Security Considerations from {{WELL_KNOWN}}.
+* The Publisher SHOULD take into account the Security Considerations from {{WELL-KNOWN}}.
 * the Publisher SHOULD perform a security and privacy review of the API Catalog prior to deployment, to ensure it does not leak personal, business or other sensitive metadata, nor expose any vulnerability related to the APIs listed.         
 
 For the internal/private APIs scenario: the Publisher SHOULD take steps to ensure that appropriate access controls are in place to ensure only authorised users access the internal api-catalog well-known URI. 
