@@ -8,6 +8,9 @@ category: std
 
 ipr: trust200902
 keyword: internet-draft
+
+stand_alone: yes
+smart_quotes: no
 pi: [toc, tocindent, sortrefs, symrefs, strict, compact, comments, inline]
 
 venue:
