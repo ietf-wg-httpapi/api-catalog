@@ -150,7 +150,9 @@ Content-Length: 356
 
 * "item" {{!RFC6573}}. When used in an API Catalog document, the 'item' link relation identifies a target resource that represents an API that is a member of the API Catalog.
 
-# Accounting for APIs distributed across multiple domains {#multiple_domains}
+# Operational considerations
+
+## Accounting for APIs distributed across multiple domains {#multiple_domains}
 
 A Publisher ('example') may have their APIs hosted across multiple domains that they manage: e.g., at example.com, developer.example.com, apis.example.com, apis.example.net etc. They may also use a third party API hosting provider which hosts APIs on a distinct domain.
                 
@@ -162,9 +164,21 @@ To account for this scenario, it is RECOMMENDED that:
 
 For example, if the Publisher's primary API portal is apis.example.com, then apis.example.com/.well-known/api-catalog SHOULD resolve to the location of the Publisher's latest API Catalog document. If the Publisher is also the domain authority for example.net, which also hosts a selection of their APIs, then a request to www.example.net/.well-known/api-catalog SHOULD redirect to apis.example.com/.well-known/api-catalog .
 
-# Internal use of api-catalog for private APIs {#INTERNAL-USE}
+## Internal use of api-catalog for private APIs {#INTERNAL-USE}
 
 A Publisher may wish to use the api-catalog well-known URI on their internal network, to signpost authorised users (e.g. company employees) towards internal/private APIs not intended for third-party use. This scenario may incur additional security considerations, as noted in {{security}}.
+
+## Scalability guidelines
+
+In cases where a Publisher has a large number of APIs, potentially deployed across multiple domains, then two challenges may arise: 
+* maintaining the catalog entries to ensure they are up to date and any errors corrected
+* restricting the catalog size to help reduce network and client-processing overheads.
+
+In both cases a Publisher may benefit from grouping their APIs, providing an API Catalog document for each group - and use the main API Catalog hosted at /.well-known/api-catalog to provide links to these. A Publisher may decide to group their APIs according to a business domain (e.g. 'gaming APIs', 'anti-fraud APIs' etc.) or a technology domain (e.g. ''IOT', 'networks', 'AI' etc.), or any other criterion. This grouping may already be implicit where the Publisher has split APIs across multiple domains. 
+
+The {{nest}} section below shows how the API Catalog at /.well-known/api-catalog can use the api-catalog link relation to point to other API Catalogs.
+
+In addition, the Publisher should consider caching and compression techniques to reduce the network overhead of large API catalogs.
 
 # The API Catalog {#API-CATALOG}    
 
@@ -186,6 +200,10 @@ Some suitable API Catalog document formats include:
 If a Publisher already lists their APIs in a format other than linkset but wish to utiise the /.well-known/api-catalog URI, then:
 * they MUST also implement a linkset with, at minimum, hyperlinks to API endpoints - see the example of  {{<<api-catalog-example-linkset-bookmarks}} in Appendix A.
 * they MAY support content negotiation at the /.well-known/api-catalog URI to allow their existing format to be returned.
+
+## Nesting API Catalog links {nest}
+
+An API Catalog may itself contain links to other API Catalogs. 
 
 # Conformance to RFC8615  {#CONFORM-RFC8615}
 
