@@ -108,20 +108,38 @@ The term "content negotiation" and "status code" are from {{HTTP}}.
 The term "well-known URI" is from {{WELL-KNOWN}}.
 The term "link relation" is from {{WEB-LINKING}}.
 
-The term "Publisher" refers to an organisation, company or individual that publishes one or more APIs for usage by external third parties.
+The term "Publisher" refers to an organisation, company or individual that 
+publishes one or more APIs for usage by external third parties. A 
+fictional Publisher named "example" is used throughout this document. 
+The examples use the FQDNs "www.example.com", "developer.example.com",
+"apis.example.com", "apis.example.net", "gaming.example.com", "iot.example.net",
+where the use of the .com and .net TLDs and various subdomains are simply
+to illustrate that the "example" Publisher may have their API portfolio 
+distributed across various domains for which they are the authority.
+For scenarios where the Publisher "example" is not the authority for
+a given *.example.* domain then that is made explicit in the text. 
 
-In this document, "API" means the specification resources required for an external party (or in the case of 'private' APIs, an internal party) to implement software which uses the Publisher's Application Programming Interface.  
+In this document, "API" means the specification resources required for an 
+external party (or in the case of 'private' APIs, an internal party) to 
+implement software which uses the Publisher's Application Programming Interface. 
+
+The specification recommends the use of TLS, hence "HTTPS" and "https://"
+are used throughout.
 
 # Using the 'api-catalog' well-known URI {#usage}
 
-The api-catalog well-known URI is intended for HTTP(S) servers that publish APIs. 
+The api-catalog well-known URI is intended for HTTPS servers that publish APIs. 
 
-* The API Catalog MUST be named "api-catalog" in a well-known location as described by {{WELL-KNOWN}}.
-* The location of the API Catalog document is decided by the Publisher: the /.well-known/api-catalog URI provides a convenient reference to that location. 
+* The API Catalog MUST be named "api-catalog" in a well-known location
+ as described by {{WELL-KNOWN}}.
+* The location of the API Catalog document is decided by the Publisher: 
+the /.well-known/api-catalog URI provides a convenient reference to that location. 
 
 A Publisher supporting this URI:
-* SHALL resolve an HTTP(S) GET request to /.well-known/api-catalog and return an API catalog document ( as described in {{API-CATALOG}} ). 
-* SHOULD resolve an HTTP(S) HEAD request to /.well-known/api-catalog with a response including a Link header with the relation(s) defined in {{LINK-RELATION}}
+* SHALL resolve an HTTPS GET request to /.well-known/api-catalog and 
+return an API catalog document ( as described in {{API-CATALOG}} ). 
+* SHOULD resolve an HTTPS HEAD request to /.well-known/api-catalog 
+with a response including a Link header with the relation(s) defined in {{LINK-RELATION}}
 
 
 # Link relations {#LINK-RELATION}
@@ -185,15 +203,57 @@ An example of {{#api-catalog-example-linkset-nesting}} is given in Appendix A.
 
 ## Accounting for APIs distributed across multiple domains {#multiple_domains}
 
-A Publisher ('example') may have their APIs hosted across multiple domains that they manage: e.g., at https://www.example.com, https://developer.example.com, https://apis.example.com, https://apis.example.net etc. They may also use a third-party API hosting provider which hosts APIs on a distinct domain.
+A Publisher ("example") may have their APIs hosted across multiple domains that they manage: e.g., at https://www.example.com, https://developer.example.com, https://apis.example.com, https://apis.example.net etc. They may also use a third-party API hosting provider which hosts APIs on a distinct domain.
                 
 To account for this scenario, it is RECOMMENDED that:
 
 * the Publisher also publish the api-catalog well-known URI at each of their API domains e.g. https://apis.example.com/.well-known/api-catalog, https://developer.example.net/.well-known/api-catalog etc. 
 * an HTTP GET request to any of these URIs returns the same result, namely, the API Catalog document. 
-* since the physical location of the API Catalog document is decided by the Publisher, and may change, the Publisher choose one of their instances of /.well-known/api-catalog as a canonical reference to the location of the latest API Catalog. The Publisher's other instances of ./well-known/api-catalog SHOULD redirect to this canonical instance of /.well-known/api-catalog to ensure the latest API Catalog is returned.
+* since the physical location of the API Catalog document is decided by the Publisher,
+and may change, the Publisher choose one of their instances of /.well-known/api-catalog
+as a canonical reference to the location of the latest API Catalog. The Publisher's
+other instances of ./well-known/api-catalog SHOULD redirect to this canonical instance of
+/.well-known/api-catalog to ensure the latest API Catalog is returned.
 
-For example, if the Publisher's primary API portal is https://apis.example.com, then https://apis.example.com/.well-known/api-catalog SHOULD resolve to the location of the Publisher's latest API Catalog document. If the Publisher is also the domain authority for https://www.example.net, which also hosts a selection of their APIs, then a request to www.example.net/.well-known/api-catalog SHOULD redirect to https://apis.example.com/.well-known/api-catalog .
+For example, if the Publisher's primary API portal is https://apis.example.com, then
+https://apis.example.com/.well-known/api-catalog SHOULD resolve to the location of the
+Publisher's latest API Catalog document. If the Publisher is also the domain authority 
+for https://www.example.net, which also hosts a selection of their APIs, then a request
+to https://www.example.net/.well-known/api-catalog SHOULD redirect
+to https://apis.example.com/.well-known/api-catalog . 
+
+If the Publisher is not the domain
+authority for https://www.example.net - or any third-party domain that hosts any of the
+Publisher's APIs - then the Publisher MAY include a link in its own API Catalog (in the example above, the API Catalog available at https://apis.example.com/.well-known/api-catalog) to 
+the API Catalog hosted at https://www.example.net/.well-known/api-catalog using the "api-catalog"
+link relation. The following example illustrates this scenario - the Publisher lists APIs hosted at a domain they are authority for in the "item" array, and then includes a 
+pointer to the API Catalog for their APIs hosted at a third-party domain 
+by using the "api-catalog" link relation.
+
+{
+  "linkset": [
+    {
+      "anchor": "https://www.example.com/.well-known/api-catalog",
+      "item": [
+        {
+          "href": "https://developer.example.com/apis/foo_api"
+        },
+        {
+          "href": "https://developer.example.com/apis/bar_api"
+        },
+        {
+          "href": "https://developer.example.com/apis/cantona_api"
+        }
+      ],
+      "api-catalog": [
+        {
+          "href": "https://www.example.net/./well-known/api-catalog"
+        }
+      ]
+    }
+  ]
+}
+
 
 ## Internal use of api-catalog for private APIs {#INTERNAL-USE}
 
@@ -205,7 +265,7 @@ In cases where a Publisher has a large number of APIs, potentially deployed acro
 * maintaining the catalog entries to ensure they are up to date and any errors corrected
 * restricting the catalog size to help reduce network and client-processing overheads.
 
-In both cases a Publisher may benefit from grouping their APIs, providing an API Catalog document for each group - and use the main API Catalog hosted at /.well-known/api-catalog to provide links to these. A Publisher may decide to group their APIs according to a business domain (e.g. 'gaming APIs', 'anti-fraud APIs' etc.) or a technology domain (e.g. ''IOT', 'networks', 'AI' etc.), or any other criterion. This grouping may already be implicit where the Publisher has split APIs across multiple domains, e.g. https://gaming.example.com, https://iot.example.com. 
+In both cases a Publisher may benefit from grouping their APIs, providing an API Catalog document for each group - and use the main API Catalog hosted at /.well-known/api-catalog to provide links to these. A Publisher may decide to group their APIs according to a business domain (e.g. 'gaming APIs', 'anti-fraud APIs' etc.) or a technology domain (e.g. ''IOT', 'networks', 'AI' etc.), or any other criterion. This grouping may already be implicit where the Publisher has split APIs across multiple domains, e.g. https://gaming.example.com, https://iot.example.net. 
 
 The {{nest}} section below shows how the API Catalog at /.well-known/api-catalog can use the api-catalog link relation to point to other API Catalogs.
 
@@ -293,13 +353,15 @@ For all scenarios:
 * The Publisher SHOULD enforce read-only privileges for external requests to .well-known/api-catalog, and for internal systems and roles that monitor the .well-known/api-catalog URI. Write privileges SHOULD only be granted to roles that perform updates to the API Catalog and/or the forwarding rewrite rules for the .well-known/api-catalog URI.
 * As with any Web offering, it is RECOMMENDED to apply rate-limiting measures to help mitigate abuse and prevent Denial-of-Service attacks on the API Catalog endpoint.
 
-For the public-facing APIs scenario: security teams SHOULD additionally audit the API Catalog to ensure no APIs intended for internal use only have been mistakenly included. For example, a catalog hosted on https://developer.example.com should not expose unnecessary metadata about any internal domains (such as https://internal.example.net).
+For the public-facing APIs scenario: security teams SHOULD additionally 
+audit the API Catalog to ensure no APIs intended for internal use only
+have been mistakenly included. For example, a catalog hosted on
+https://developer.example.com should not expose unnecessary metadata
+about any internal domains (such as https://internal.example.com).
 
-        
-For the internal/private APIs scenario: the Publisher SHOULD take steps to ensure that appropriate access controls are in place to ensure only authorised roles and systems access an internal api-catalog well-known URI. 
-
-
-
+For the internal/private APIs scenario: the Publisher SHOULD take steps to
+ensure that appropriate access controls are in place to ensure only authorised
+roles and systems access an internal api-catalog well-known URI. 
 
 --- back
 
@@ -309,7 +371,8 @@ This section is informative and provides and example of an API Catalog document 
 
 ## Using Linkset with RFC8615 relations
 
-This example uses the linkset format {{!RFC9264}}, and the following link relations defined in {{?RFC8631}}:
+This example uses the linkset format {{!RFC9264}}, and the following link
+relations defined in {{?RFC8631}}:
 
 * "service-desc", used to link to a description of the API that is primarily intended for machine consumption.
 * "service-doc", used to link to API documentation that is primarily intended for human consumption.
@@ -467,15 +530,23 @@ Content-Type: application/linkset+json;
 ~~~
 
 ~~~
-{ "linkset":
- [
-   { "anchor": "https://www.example.com/.well-known/api-catalog",
-     "api-catalog": [
-       {"href": "https://apis.example.com/iot/api-catalog"},
-       {"href": "https://ecommerce.example.com/api-catalog"},
-       {"href": "https://developer.example.com/gaming/api-catalog"}
-     ]
- ]
+{
+  "linkset": [
+    {
+      "anchor": "https://www.example.com/.well-known/api-catalog",
+      "api-catalog": [
+        {
+          "href": "https://apis.example.com/iot/api-catalog"
+        },
+        {
+          "href": "https://ecommerce.example.com/api-catalog"
+        },
+        {
+          "href": "https://developer.example.com/gaming/api-catalog"
+        }
+      ]
+    }
+  ]
 }
 
 ~~~
