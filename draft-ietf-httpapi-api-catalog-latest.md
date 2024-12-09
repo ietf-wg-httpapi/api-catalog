@@ -104,7 +104,7 @@ and automated usage of the APIs, this document proposes:
 reference to an API catalog document describing a Publisher's API 
 endpoints.
 - a link relation {{WEB-LINKING}}, 'api-catalog', of which the target 
-resource is the Publisher's API Catalog document.
+resource is the Publisher's API catalog document.
  
 ## Goals and non-goals {#goals}
 
@@ -154,9 +154,9 @@ The specification recommends the use of TLS, hence "HTTPS" and
 The api-catalog well-known URI is intended for HTTPS servers that 
 publish APIs. 
 
-* The API Catalog MUST be named "api-catalog" in a well-known location
+* The API catalog MUST be named "api-catalog" in a well-known location
  as described by {{WELL-KNOWN}}.
-* The location of the API Catalog document is decided by the Publisher: 
+* The location of the API catalog document is decided by the Publisher: 
 the /.well-known/api-catalog URI provides a convenient reference to 
 that location. 
 
@@ -205,24 +205,24 @@ Content-Length: 356
 
 ## Using additional link relations
 
-* "item" {{!RFC6573}}. When used in an API Catalog document, the 
+* "item" {{!RFC6573}}. When used in an API catalog document, the 
 "item" link relation identifies a target resource that represents an 
-API that is a member of the API Catalog.
+API that is a member of the API catalog.
 
-* Other link relations may be utilised in an API Catalog to convey metadata 
+* Other link relations may be utilised in an API catalog to convey metadata 
 descriptions for API links. 
 
-# The API Catalog document {#api-catalog}
+# The API catalog document {#api-catalog}
 
-The API Catalog is a document listing hyperlinks to a Publisher's 
-APIs. The Publisher may host this API Catalog document at any URI(s) 
-they choose. As illustration, the API Catalog document URI of 
+The API catalog is a document listing hyperlinks to a Publisher's 
+APIs. The Publisher may host this API catalog document at any URI(s) 
+they choose. As illustration, the API catalog document URI of 
 `https://www.example.com/my_api_catalog.json` can be requested 
 directly, or via a request to 
 `https://www.example.com/.well-known/api-catalog`, which the Publisher
 will resolve to `https://www.example.com/my_api_catalog`.
 
-The Publisher MUST publish the API Catalog document in the Linkset 
+The Publisher MUST publish the API catalog document in the Linkset 
 format `application/linkset+json` (section 4.2 of {{!RFC9264}}). 
 In addition, the Publisher MAY make additional formats available via 
 content negotiation (section 5.3 of {{!HTTP}}) to their 
@@ -230,23 +230,23 @@ content negotiation (section 5.3 of {{!HTTP}}) to their
 formats that support the automated discovery, and machine (and 
 human) usage of a Publisher's APIs, is listed below.
 
-The API Catalog document MUST include hyperlinks to API endpoints, 
+The API catalog document MUST include hyperlinks to API endpoints, 
 and is RECOMMENDED to include useful metadata, such as usage 
 policies, API version information, links to the OpenAPI Specification 
 [OAS] definitions for each API, etc. If the Publisher does not 
-include these metadata directly in the API Catalog document, they 
+include these metadata directly in the API catalog document, they 
 SHOULD make that metadata available at the API endpoint URIs they 
 have listed (see {{api-catalog-example-linkset-bookmarks}} for 
 an example).
 
-Some suitable API Catalog document formats include: 
+Some suitable API catalog document formats include: 
 
 * A linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of 
 API endpoints and information to facilitate API usage. The linkset 
 SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with 
 a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL' to indicate the 
-linkset is representing an API Catalog document as defined above. 
-Appendix A includes example API Catalog documents based on the 
+linkset is representing an API catalog document as defined above. 
+Appendix A includes example API catalog documents based on the 
 linkset format. 
 * An APIs.json document [APIsjson].
 * API bookmarks that represent an API entry-point URI, which may be 
@@ -265,9 +265,9 @@ API endpoints - see the example of
 /.well-known/api-catalog URI to allow their existing format to be 
 returned.
 
-## Nesting API Catalog links {#nest}
+## Nesting API catalog links {#nest}
 
-An API Catalog may itself contain links to other API Catalogs, by 
+An API catalog may itself contain links to other API catalogs, by 
 using the 'api-catalog' relation type for each link.
 An example of this is given in {{api-catalog-example-linkset-nesting}}.
 
@@ -288,19 +288,19 @@ To account for this scenario, it is RECOMMENDED that:
  `https://apis.example.com/.well-known/api-catalog`, 
  `https://developer.example.net/.well-known/api-catalog` etc. 
 * An HTTPS GET request to any of these URIs returns the same result,
- namely, the API Catalog document. 
-* Since the physical location of the API Catalog document is decided
+ namely, the API catalog document. 
+* Since the physical location of the API catalog document is decided
  by the Publisher, and may change, the Publisher choose one of their
 instances of /.well-known/api-catalog as a canonical reference to 
-the location of the latest API Catalog. The Publisher's other 
+the location of the latest API catalog. The Publisher's other 
 instances of ./well-known/api-catalog SHOULD redirect to this 
 canonical instance of /.well-known/api-catalog to ensure the latest
-API Catalog is returned.
+API catalog is returned.
 
 For example, if the Publisher's primary API portal is 
 `https://apis.example.com`, then 
 `https://apis.example.com/.well-known/api-catalog` SHOULD resolve to 
-the location of the Publisher's latest API Catalog document. If the 
+the location of the Publisher's latest API catalog document. If the 
 Publisher is also the domain authority for `www.example.net`, 
 which also hosts a selection of their APIs, then a request to 
 `https://www.example.net/.well-known/api-catalog` SHOULD redirect
@@ -309,10 +309,10 @@ to `https://apis.example.com/.well-known/api-catalog` .
 If the Publisher is not the domain authority for 
 `www.example.net` - or any third-party domain that hosts any 
 of the Publisher's APIs - then the Publisher MAY include a link in 
-its own API Catalog to that third-party domain's API Catalog.
-For example, the API Catalog available 
+its own API catalog to that third-party domain's API catalog.
+For example, the API catalog available 
 at `https://apis.example.com/.well-known/api-catalog`) may list APIs 
-hosted at `apis.example.com` and also link to the API Catalog hosted 
+hosted at `apis.example.com` and also link to the API catalog hosted 
 at `https://www.example.net/.well-known/api-catalog` using the 
 "api-catalog" link relation:
 
@@ -357,8 +357,8 @@ any errors corrected.
 client-processing overheads.
 
 In both cases a Publisher may benefit from grouping their APIs, 
-providing an API Catalog document for each group - and use the main 
-API Catalog hosted at /.well-known/api-catalog to provide links to 
+providing an API catalog document for each group - and use the main 
+API catalog hosted at /.well-known/api-catalog to provide links to 
 these. For example a Publisher may decide to group their APIs 
 according to a business category (e.g. 'gaming APIs', 'anti-fraud APIs'
  etc.) or a technology category (e.g. ''IOT', 'networks', 'AI' etc.), 
@@ -366,45 +366,45 @@ or any other criterion. This grouping may already be implicit where
 the Publisher has already published their APIs across multiple 
 domains, e.g. at `gaming.example.com`, `iot.example.net`, etc. 
 
-{{nest}} shows how the API Catalog at 
+{{nest}} shows how the API catalog at 
 /.well-known/api-catalog can use the api-catalog link relation to 
-point to other API Catalogs. 
+point to other API catalogs. 
 
 The Publisher SHOULD consider caching and compression 
-techniques to reduce the network overhead of large API Catalogs.
+techniques to reduce the network overhead of large API catalogs.
 
 ## Monitoring and maintenance {#maintenance}
 
 Publishers are RECOMMENDED to follow operational best practice when 
-hosting API Catalog(s), including but not limited to:
+hosting API catalog(s), including but not limited to:
 
 * Availability. The Publisher SHOULD monitor availability of the API 
-Catalog, and consider alternate means to resolve requests to 
+catalog, and consider alternate means to resolve requests to 
 /.well-known/api-catalog during planned downtime of hosts.
 * Performance. Although the performance of APIs listed in an API 
-Catalog can demand high transactions per second and low-latency 
-response, the retrieval of the API Catalog itself to discover those 
+catalog can demand high transactions per second and low-latency 
+response, the retrieval of the API catalog itself to discover those 
 APIs is less likely to incur strict performance demands. That said, 
 the Publisher SHOULD monitor the response time to fulfil a request 
-for the API Catalog, and determine any necessary improvements (as 
+for the API catalog, and determine any necessary improvements (as 
 with any other Web resource the Publisher serves). For large API 
-Catalogs, the Publisher SHOULD consider the techniques described in 
+catalogs, the Publisher SHOULD consider the techniques described in 
 {{scalability}}.
 * Usage. Since the goal of the api-catalog well-known URI is to 
 facilitate discovery of APIs, the Publisher may wish to correlate 
 requests to the /.well-known/api-catalog URI with subsequent requests 
 to the API URIs listed in the catalog.
 * Current data. The Publisher SHOULD include the removal of stale API 
-entries from the API Catalog as part of their API release lifecycle. 
+entries from the API catalog as part of their API release lifecycle. 
 The Publisher MAY decide to include metadata regarding legacy API 
 versions or deprecated APIs to help users of those APIs discover 
 up-to-date alternatives.
 * Correct metadata. The Publisher SHOULD include human and/or 
-automated checks for syntax errors in the API Catalog. Automated 
+automated checks for syntax errors in the API catalog. Automated 
 checks include format validation (e.g. to ensure valid JSON syntax) 
 and linting to enforce business rules - such as removing duplicate 
 entries and ensuring descriptions are correctly named with valid 
-values. A proofread of the API Catalog as part of the API release 
+values. A proofread of the API catalog as part of the API release 
 lifecycle is RECOMMENDED to detect any errors in business grammar 
 (for example, an API entry that is described with valid syntax, but 
 has been allocated an incorrect or outdated description.)
@@ -416,14 +416,14 @@ A Publisher may already utilise an API management framework to
 produce their API portfolio. These frameworks typically include the 
 publication of API endpoint URIs, deprecation and redirection of 
 legacy API versions, API usage policies and documentation, etc. 
-The api-catalog well-known URI and API Catalog document are intended 
+The api-catalog well-known URI and API catalog document are intended 
 to complement API management frameworks by facilitating the discovery 
 of the framework's outputs - API endpoints, usage policies and 
 documentation - and are not intended to replace any existing 
 API discovery mechanisms the framework has implemented.
 
 Providers of such frameworks may include the production of an API 
-Catalog and the publication of the /.well-known/api-catalog URI as a 
+catalog and the publication of the /.well-known/api-catalog URI as a 
 final pre-release (or post-release) step in the release management 
 workflow. The following steps are recommended:
 
@@ -431,16 +431,16 @@ If the ./well-known/api-catalog URI has not been published previously,
 the framework provider should:
  
 * Collate and check the metadata for each API that will be included 
-in the API Catalog. This metadata is likely to already exist in the 
+in the API catalog. This metadata is likely to already exist in the 
 framework.
-* Determine which metadata to include in the API Catalog, following 
+* Determine which metadata to include in the API catalog, following 
 the requirements set out in {{api-catalog}} and the considerations 
 set out in {{operations}}.
 * Map the chosen metadata to the format(s) described in 
 {{api-catalog}}. Where only the hyperlinks to APIs are to be 
-included in the API Catalog, then the structure suggested in 
+included in the API catalog, then the structure suggested in 
 {{api-catalog-example-linkset-bookmarks}} may be followed. Where 
-possible the API Catalog SHOULD include further metadata per the 
+possible the API catalog SHOULD include further metadata per the 
 guidance in {{api-catalog}}, in which case the structure suggested 
 in {{api-catalog-example-linkset}} can be utilised and adapted 
 (ensuring compliance to {{!RFC9264}}) to reflect the nature of the 
@@ -452,11 +452,11 @@ If the ./well-known/api-catalog URI has previously been published,
 the framework provider should:
 
 * Include a step in the release management lifecycle to refresh the 
-API Catalog following any changes in API hyperlinks or published 
+API catalog following any changes in API hyperlinks or published 
 metadata. This could include placing triggers on certain metadata 
 fields, so that as they are updated in pre-production on the API 
 framework, the updates are pushed to a pre-production copy of the API 
-Catalog to be pushed live when the release is published by the 
+catalog to be pushed live when the release is published by the 
 framework.
 
 # Conformance to RFC8615 {#conform-rfc8615}
@@ -508,9 +508,9 @@ a list of APIs available from the Publisher of the context resource.
  registry according to {{!RFC7284}}.
 
 * Profile URI: THIS-RFC-URL
-* Common Name: API Catalog
+* Common Name: API catalog
 * Description: A profile URI to request or signal a linkset 
-representing an API Catalog.
+representing an API catalog.
 * Reference: THIS-RFC
 
 RFC Editor's Note: IANA is kindly requested to replace all instances 
@@ -522,25 +522,25 @@ assigned.
 For all scenarios: 
 
 * TLS SHOULD be used, i.e. make /.well-known/api-catalog available 
-exclusively over HTTPS, to ensure no tampering of the API Catalog.
+exclusively over HTTPS, to ensure no tampering of the API catalog.
 * The Publisher SHOULD take into account the Security Considerations 
 from section 4 of {{WELL-KNOWN}}.
 * The Publisher SHOULD perform a security and privacy review of the 
-API Catalog prior to deployment, to ensure it does not leak personal, 
+API catalog prior to deployment, to ensure it does not leak personal, 
 business or other sensitive metadata, nor expose any vulnerability 
 related to the APIs listed. 
 * The Publisher SHOULD enforce read-only privileges for external 
 requests to .well-known/api-catalog, and for internal systems and 
 roles that monitor the .well-known/api-catalog URI. Write privileges 
 SHOULD only be granted to roles that perform updates to the API 
-Catalog and/or the forwarding rewrite rules for the 
+catalog and/or the forwarding rewrite rules for the 
 .well-known/api-catalog URI.
 * As with any Web offering, it is RECOMMENDED to apply rate-limiting 
 measures to help mitigate abuse and prevent Denial-of-Service 
-attacks on the API Catalog endpoint.
+attacks on the API catalog endpoint.
 
 For the public-facing APIs scenario: security teams SHOULD 
-additionally audit the API Catalog to ensure no APIs intended solely
+additionally audit the API catalog to ensure no APIs intended solely
 for internal use have been mistakenly included. For example, a 
 catalog hosted on `https://developer.example.com` should not expose 
 unnecessary metadata about any internal domains 
@@ -562,10 +562,10 @@ of scope of this document.
 
 --- back
 
-# Example API Catalog documents {#api-catalog-example-linkset}
+# Example API catalog documents {#api-catalog-example-linkset}
 
 This section is informative and provides and example of an API 
-Catalog document using the RECOMMENDED linkset format.
+catalog document using the RECOMMENDED linkset format.
 
 ## Using Linkset with RFC8615 relations
 
@@ -674,7 +674,7 @@ Content-Type: application/linkset+json;
 
 This example also uses the linkset format {{!RFC9264}}, listing the 
 API endpoints in an array of bookmarks. Each link shares the same 
-context anchor (the well-known URI of the API Catalog) and "item" 
+context anchor (the well-known URI of the API catalog) and "item" 
 {{!RFC9264}} link relation (to indicate they are an item in the 
 catalog). The intent is that by following a bookmark link, a 
 machine-client can discover the purpose and usage policy for each 
@@ -713,7 +713,7 @@ Content-Type: application/linkset+json;
 }
 ~~~
 
-## Nesting API Catalog links {#api-catalog-example-linkset-nesting}
+## Nesting API catalog links {#api-catalog-example-linkset-nesting}
 
 In this example, a request to the /.well-known/api-catalog URI 
 returns an array of links of relation type 'api-catalog'. This can be 
