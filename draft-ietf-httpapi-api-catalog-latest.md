@@ -92,12 +92,12 @@ the publisher's APIs.
 
 # Introduction {#introduction}
 
-An organisation or individual may publish Application Programming
-Interfaces (APIs) to encourage requests for interaction from external
-parties. Such APIs must be discovered before they may be used - i.e., 
-the external party needs to know what APIs a given publisher exposes, 
-their purpose, any policies for usage, and the endpoint to interact 
-with each API. To facilitate automated discovery of this information, 
+An application may publish Application Programming Interfaces (APIs)
+to encourage requests for interaction from external parties. Such
+APIs must be discovered before they may be used - i.e., the external
+party needs to know what APIs a given publisher exposes, their
+purpose, any policies for usage, and the endpoint to interact with
+each API. To facilitate automated discovery of this information, 
 and automated usage of the APIs, this document proposes:
 
 - a well-known URI {{WELL-KNOWN}}, 'api-catalog', encoded as a URI 
