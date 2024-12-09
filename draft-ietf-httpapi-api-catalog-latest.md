@@ -366,7 +366,7 @@ or any other criterion. This grouping may already be implicit where
 the Publisher has already published their APIs across multiple 
 domains, e.g. at `gaming.example.com`, `iot.example.net`, etc. 
 
-{{nest}} below shows how the API Catalog at 
+{{nest}} shows how the API Catalog at 
 /.well-known/api-catalog can use the api-catalog link relation to 
 point to other API Catalogs. 
 
