@@ -378,7 +378,7 @@ techniques to reduce the network overhead of large API Catalogs.
 Publishers are RECOMMENDED to follow operational best practice when 
 hosting API Catalog(s), including but not limited to:
 
-* Health. The Publisher SHOULD monitor availability of the API 
+* Availability. The Publisher SHOULD monitor availability of the API 
 Catalog, and consider alternate means to resolve requests to 
 /.well-known/api-catalog during planned downtime of hosts.
 * Performance. Although the performance of APIs listed in an API 
