@@ -293,17 +293,17 @@ To account for this scenario, it is RECOMMENDED that:
  by the Publisher, and may change, the Publisher choose one of their
 instances of /.well-known/api-catalog as a canonical reference to 
 the location of the latest API catalog. The Publisher's other 
-instances of /.well-known/api-catalog SHOULD redirect to this 
+instances of /.well-known/api-catalog should redirect to this 
 canonical instance of /.well-known/api-catalog to ensure the latest
 API catalog is returned.
 
 For example, if the Publisher's primary API portal is 
 `https://apis.example.com`, then 
-`https://apis.example.com/.well-known/api-catalog` SHOULD resolve to 
+`https://apis.example.com/.well-known/api-catalog` should resolve to 
 the location of the Publisher's latest API catalog document. If the 
 Publisher is also the domain authority for `www.example.net`, 
 which also hosts a selection of their APIs, then a request to 
-`https://www.example.net/.well-known/api-catalog` SHOULD redirect
+`https://www.example.net/.well-known/api-catalog` should redirect
 to `https://apis.example.com/.well-known/api-catalog` . 
 
 If the Publisher is not the domain authority for 
@@ -378,28 +378,28 @@ techniques to reduce the network overhead of large API catalogs.
 Publishers are RECOMMENDED to follow operational best practice when 
 hosting API catalog(s), including but not limited to:
 
-* Availability. The Publisher SHOULD monitor availability of the API 
+* Availability. The Publisher should monitor availability of the API 
 catalog, and consider alternate means to resolve requests to 
 /.well-known/api-catalog during planned downtime of hosts.
 * Performance. Although the performance of APIs listed in an API 
 catalog can demand high transactions per second and low-latency 
 response, the retrieval of the API catalog itself to discover those 
 APIs is less likely to incur strict performance demands. That said, 
-the Publisher SHOULD monitor the response time to fulfil a request 
+the Publisher should monitor the response time to fulfil a request 
 for the API catalog, and determine any necessary improvements (as 
 with any other Web resource the Publisher serves). For large API 
-catalogs, the Publisher SHOULD consider the techniques described in 
+catalogs, the Publisher should consider the techniques described in 
 {{scalability}}.
 * Usage. Since the goal of the api-catalog well-known URI is to 
 facilitate discovery of APIs, the Publisher may wish to correlate 
 requests to the /.well-known/api-catalog URI with subsequent requests 
 to the API URIs listed in the catalog.
-* Current data. The Publisher SHOULD include the removal of stale API 
+* Current data. The Publisher should include the removal of stale API 
 entries from the API catalog as part of their API release lifecycle. 
 The Publisher MAY decide to include metadata regarding legacy API 
 versions or deprecated APIs to help users of those APIs discover 
 up-to-date alternatives.
-* Correct metadata. The Publisher SHOULD include human and/or 
+* Correct metadata. The Publisher should include human and/or 
 automated checks for syntax errors in the API catalog. Automated 
 checks include format validation (e.g. to ensure valid JSON syntax) 
 and linting to enforce business rules - such as removing duplicate 
@@ -440,7 +440,7 @@ set out in {{operations}}.
 {{api-catalog}}. Where only the hyperlinks to APIs are to be 
 included in the API catalog, then the structure suggested in 
 {{api-catalog-example-linkset-bookmarks}} may be followed. Where 
-possible the API catalog SHOULD include further metadata per the 
+possible the API catalog should include further metadata per the 
 guidance in {{api-catalog}}, in which case the structure suggested 
 in {{api-catalog-example-linkset}} can be utilised and adapted 
 (ensuring compliance to {{!RFC9264}}) to reflect the nature of the 
