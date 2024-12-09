@@ -105,7 +105,7 @@ reference to an API catalog document describing a Publisher's API
 endpoints.
 - a link relation {{WEB-LINKING}}, 'api-catalog', of which the target 
 resource is the Publisher's API Catalog document.
-                    
+ 
 ## Goals and non-goals {#goals}
 
 The primary goal is to facilitate the automated discovery of a 
@@ -125,7 +125,7 @@ do so).
 
 {::boilerplate bcp14+}
 
-The term "content negotiation" and "status code" are from {{HTTP}}.
+The terms "content negotiation" and "status code" are from {{HTTP}}.
 The term "well-known URI" is from {{WELL-KNOWN}}.
 The term "link relation" is from {{WEB-LINKING}}.
 
@@ -212,7 +212,7 @@ API that is a member of the API Catalog.
 * Other link relations may be utilised in an API Catalog to convey metadata 
 descriptions for API links. 
 
-# The API Catalog document {#api-catalog}    
+# The API Catalog document {#api-catalog}
 
 The API Catalog is a document listing hyperlinks to a Publisher's 
 APIs. The Publisher may host this API Catalog document at any URI(s) 
@@ -221,7 +221,7 @@ they choose. As illustration, the API Catalog document URI of
 directly, or via a request to 
 `https://www.example.com/.well-known/api-catalog`, which the Publisher
 will resolve to `https://www.example.com/my_api_catalog`.
-            
+
 The Publisher MUST publish the API Catalog document in the Linkset 
 format `application/linkset+json` (section 4.2 of {{!RFC9264}}). 
 In addition, the Publisher MAY make additional formats available via 
@@ -233,12 +233,12 @@ human) usage of a Publisher's APIs, is listed below.
 The API Catalog document MUST include hyperlinks to API endpoints, 
 and is RECOMMENDED to include useful metadata, such as usage 
 policies, API version information, links to the OpenAPI Specification 
-[OAS] definitions for each API, etc..  If the Publisher does not 
+[OAS] definitions for each API, etc. If the Publisher does not 
 include these metadata directly in the API Catalog document, they 
 SHOULD make that metadata available at the API endpoint URIs they 
 have listed (see {{api-catalog-example-linkset-bookmarks}} for 
 an example).
-            
+
 Some suitable API Catalog document formats include: 
 
 * A linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of 
@@ -280,7 +280,7 @@ domains that they manage: e.g., at `www.example.com`,
 `developer.example.com`, `apis.example.com`, 
 `apis.example.net` etc. They may also use a third-party API 
 hosting provider which hosts APIs on a distinct domain.
-                
+
 To account for this scenario, it is RECOMMENDED that:
 
 * The Publisher also publish the api-catalog well-known URI at each
@@ -380,11 +380,11 @@ hosting API Catalog(s), including but not limited to:
 
 * Health. The Publisher SHOULD monitor availability of the API 
 Catalog, and consider alternate means to resolve requests to 
-/.well-known/api-catalog during planned downtime of hosts.  
+/.well-known/api-catalog during planned downtime of hosts.
 * Performance. Although the performance of APIs listed in an API 
 Catalog can demand high transactions per second and low-latency 
 response, the retrieval of the API Catalog itself to discover those 
-APIs is less likely to incur strict  performance demands. That said, 
+APIs is less likely to incur strict performance demands. That said, 
 the Publisher SHOULD monitor the response time to fulfil a request 
 for the API Catalog, and determine any necessary improvements (as 
 with any other Web resource the Publisher serves). For large API 
@@ -444,20 +444,20 @@ possible the API Catalog SHOULD include further metadata per the
 guidance in {{api-catalog}}, in which case the structure suggested 
 in {{api-catalog-example-linkset}} can be utilised and adapted 
 (ensuring compliance to {{!RFC9264}}) to reflect the nature of the 
-chosen metadata.  
+chosen metadata.
 * Publish the /.well-known/api-catalog URI following the guidance set 
 out in {{usage}}.
 
 If the ./well-known/api-catalog URI has previously been published,
 the framework provider should:
-  
+
 * Include a step in the release management lifecycle to refresh the 
 API Catalog following any changes in API hyperlinks or published 
 metadata. This could include placing triggers on certain metadata 
 fields, so that as they are updated in pre-production on the API 
 framework, the updates are pushed to a pre-production copy of the API 
 Catalog to be pushed live when the release is published by the 
-framework.   
+framework.
 
 # Conformance to RFC8615 {#conform-rfc8615}
 
@@ -489,7 +489,7 @@ Well-Known URI Registry as defined by {{WELL-KNOWN}}.
 
 * URI suffix: api-catalog
 * Change Controller: IETF
-* Specification document(s):  THIS-RFC
+* Specification document(s): THIS-RFC
 * Status: permanent
 
 ## The api-catalog link relation
@@ -497,10 +497,10 @@ Well-Known URI Registry as defined by {{WELL-KNOWN}}.
 This specification registers the "api-catalog" link relation by 
 following the procedures per section 2.1.1.1 of {{WEB-LINKING}}
 
-* Relation Name:  api-catalog
-* Description:  The link target identifies a resource that represents
+* Relation Name: api-catalog
+* Description: The link target identifies a resource that represents
 a list of APIs available from the Publisher of the context resource.
-* Reference:  THIS-RFC
+* Reference: THIS-RFC
 
 ## The api-catalog Profile URI
 
@@ -522,7 +522,7 @@ assigned.
 For all scenarios: 
 
 * TLS SHOULD be used, i.e. make /.well-known/api-catalog available 
-exclusively over HTTPS,  to ensure no tampering of the API Catalog.
+exclusively over HTTPS, to ensure no tampering of the API Catalog.
 * The Publisher SHOULD take into account the Security Considerations 
 from {{WELL-KNOWN}}.
 * The Publisher SHOULD perform a security and privacy review of the 
@@ -550,6 +550,9 @@ For the internal/private APIs scenario: the Publisher SHOULD take
 steps to ensure that appropriate controls - such as CORS policies and 
 access control lists - are in place to ensure only authorised roles 
 and systems may access an internal api-catalog well-known URI.
+
+Note the registration of domain names and associated policies is out
+of scope of this document.
 
 --- back
 
@@ -756,6 +759,6 @@ Content-Type: application/linkset+json;
 
 Thanks to Jan Algermissen, Phil Archer, Tim Bray, Ben Bucksch, Sanjay 
 Dalal, David Dong, Mallory Knodel, Max Maton, Darrel Miller, Mark 
-Nottingham,  Roberto Polli, Joey Salazar, Rich Salz, Herbert Van De 
+Nottingham, Roberto Polli, Joey Salazar, Rich Salz, Herbert Van De 
 Sompel, Tina Tsou and Erik Wilde for their reviews, suggestions and 
 support.
