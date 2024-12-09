@@ -408,7 +408,7 @@ values. A proofread of the API Catalog as part of the API release
 lifecycle is RECOMMENDED to detect any errors in business grammar 
 (for example, an API entry that is described with valid syntax, but 
 has been allocated an incorrect or outdated description.)
-* Security best practice, as set out in {{security}}
+* Security best practice, as set out in {{security}}.
 
 ## Integration with existing API management frameworks {#integration}
 
@@ -551,6 +551,12 @@ steps to ensure that appropriate controls - such as CORS policies and
 access control lists - are in place to ensure only authorised roles 
 and systems may access an internal api-catalog well-known URI.
 
+A comprehensive API catalog that is regularly audited may assist
+the Publisher in decommissioning 'zombie' APIs i.e., legacy/obsolete
+APIs that should no longer be available. Such APIs represent a
+security vulnerability as they are unlikely to be supported,
+monitored, patched or updated.
+ 
 Note the registration of domain names and associated policies is out
 of scope of this document.
 
