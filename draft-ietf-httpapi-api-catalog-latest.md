@@ -524,7 +524,7 @@ For all scenarios:
 * TLS SHOULD be used, i.e. make /.well-known/api-catalog available 
 exclusively over HTTPS, to ensure no tampering of the API Catalog.
 * The Publisher SHOULD take into account the Security Considerations 
-from {{WELL-KNOWN}}.
+from section 4 of {{WELL-KNOWN}}.
 * The Publisher SHOULD perform a security and privacy review of the 
 API Catalog prior to deployment, to ensure it does not leak personal, 
 business or other sensitive metadata, nor expose any vulnerability 
