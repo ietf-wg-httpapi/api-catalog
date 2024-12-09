@@ -241,13 +241,13 @@ an example).
 
 Some suitable API catalog document formats include: 
 
-* A linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of 
-API endpoints and information to facilitate API usage. The linkset 
+* A Linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of 
+API endpoints and information to facilitate API usage. The Linkset 
 SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with 
 a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL' to indicate the 
-linkset is representing an API catalog document as defined above. 
+Linkset is representing an API catalog document as defined above. 
 Appendix A includes example API catalog documents based on the 
-linkset format. 
+Linkset format. 
 * An APIs.json document [APIsjson].
 * API bookmarks that represent an API entry-point URI, which may be 
 followed to discover purpose and usage.
@@ -256,9 +256,9 @@ followed to discover purpose and usage.
 * An extension to the Schema.org WebAPI type [WebAPIext].
 
 If a Publisher already lists their APIs in a format other than 
-linkset but wish to utilise the /.well-known/api-catalog URI, then:
+Linkset but wish to utilise the /.well-known/api-catalog URI, then:
 
-* They MUST also implement a linkset with, at minimum, hyperlinks to 
+* They MUST also implement a Linkset with, at minimum, hyperlinks to 
 API endpoints - see the example of 
 {{api-catalog-example-linkset-bookmarks}} in Appendix A.
 * They MAY support content negotiation at the 
@@ -509,7 +509,7 @@ a list of APIs available from the Publisher of the context resource.
 
 * Profile URI: THIS-RFC-URL
 * Common Name: API catalog
-* Description: A profile URI to request or signal a linkset 
+* Description: A profile URI to request or signal a Linkset 
 representing an API catalog.
 * Reference: THIS-RFC
 
@@ -565,13 +565,12 @@ of scope of this document.
 # Example API catalog documents {#api-catalog-example-linkset}
 
 This section is informative and provides and example of an API 
-catalog document using the RECOMMENDED linkset format.
+catalog document using the Linkset format.
 
 ## Using Linkset with RFC8615 relations
 
-This example uses the linkset format {{!RFC9264}}, and the following 
-link
-relations defined in {{?RFC8631}}:
+This example uses the Linkset format {{!RFC9264}}, and the following 
+link relations defined in {{?RFC8631}}:
 
 * "service-desc", used to link to a description of the API that is 
 primarily intended for machine consumption.
@@ -672,7 +671,7 @@ Content-Type: application/linkset+json;
 
 ## Using Linkset with bookmarks {#api-catalog-example-linkset-bookmarks}
 
-This example also uses the linkset format {{!RFC9264}}, listing the 
+This example also uses the Linkset format {{!RFC9264}}, listing the 
 API endpoints in an array of bookmarks. Each link shares the same 
 context anchor (the well-known URI of the API catalog) and "item" 
 {{!RFC9264}} link relation (to indicate they are an item in the 
