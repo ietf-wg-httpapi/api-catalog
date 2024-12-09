@@ -174,7 +174,7 @@ in {{link-relation}}
 This document introduces a new link relation {{WEB-LINKING}}, 
 "api-catalog". This identifies a target resource that represents a 
 list of APIs available from the Publisher of the context resource. 
-The target resource URI may be ./well-known/api-catalog , or any other 
+The target resource URI may be /.well-known/api-catalog , or any other 
 URI chosen by the Publisher. For example, the Publisher 'example' 
 could include the api-catalog link relation in the HTTP header and/or 
 content payload when responding to a request to `https://www.example.com` : 
@@ -293,7 +293,7 @@ To account for this scenario, it is RECOMMENDED that:
  by the Publisher, and may change, the Publisher choose one of their
 instances of /.well-known/api-catalog as a canonical reference to 
 the location of the latest API catalog. The Publisher's other 
-instances of ./well-known/api-catalog SHOULD redirect to this 
+instances of /.well-known/api-catalog SHOULD redirect to this 
 canonical instance of /.well-known/api-catalog to ensure the latest
 API catalog is returned.
 
@@ -332,7 +332,7 @@ at `https://www.example.net/.well-known/api-catalog` using the
           "href": "https://developer.example.com/apis/cantona_api"
         }
       ],
-      "api-catalog": "https://www.example.net/./well-known/api-catalog"
+      "api-catalog": "https://www.example.net/.well-known/api-catalog"
     }
   ]
 }
@@ -427,7 +427,7 @@ catalog and the publication of the /.well-known/api-catalog URI as a
 final pre-release (or post-release) step in the release management 
 workflow. The following steps are recommended:
 
-If the ./well-known/api-catalog URI has not been published previously, 
+If the /.well-known/api-catalog URI has not been published previously, 
 the framework provider should:
  
 * Collate and check the metadata for each API that will be included 
@@ -448,7 +448,7 @@ chosen metadata.
 * Publish the /.well-known/api-catalog URI following the guidance set 
 out in {{usage}}.
 
-If the ./well-known/api-catalog URI has previously been published,
+If the /.well-known/api-catalog URI has previously been published,
 the framework provider should:
 
 * Include a step in the release management lifecycle to refresh the 
