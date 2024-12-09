@@ -164,7 +164,7 @@ A Publisher supporting this URI:
 
 * SHALL resolve an HTTPS GET request to /.well-known/api-catalog and 
 return an API catalog document ( as described in {{api-catalog}} ). 
-* SHOULD resolve an HTTPS HEAD request to /.well-known/api-catalog 
+* SHALL resolve an HTTPS HEAD request to /.well-known/api-catalog 
 with a response including a Link header with the relation(s) defined 
 in {{link-relation}}
 
