@@ -84,9 +84,9 @@ informative:
 
 This document defines the "api-catalog" well-known URI and link 
 relation. It is intended to facilitate automated discovery and 
-usage of the APIs published by a given organisation or individual. 
-A request to the api-catalog resource will return a document 
-providing information about, and links to, the publisher's APIs.
+usage of published APIs. A request to the api-catalog resource
+will return a document providing information about, and links to,
+the publisher's APIs.
 
 --- middle
 
