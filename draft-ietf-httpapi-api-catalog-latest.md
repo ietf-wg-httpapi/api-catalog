@@ -214,49 +214,43 @@ descriptions for API links.
 
 # The API catalog document {#api-catalog}
 
-The API catalog is a document listing hyperlinks to a Publisher's 
-APIs. The Publisher may host this API catalog document at any URI(s) 
+The API catalog is a document listing a Publisher's APIs. The
+Publisher may host the API catalog document at any URI(s) 
 they choose. As illustration, the API catalog document URI of 
 `https://www.example.com/my_api_catalog.json` can be requested 
-directly, or via a request to 
-`https://www.example.com/.well-known/api-catalog`, which the Publisher
-will resolve to `https://www.example.com/my_api_catalog`.
+directly, or via a request to
+`https://www.example.com/.well-known/api-catalog`, which the
+Publisher will resolve to `https://www.example.com/my_api_catalog`.
 
-The Publisher MUST publish the API catalog document in the Linkset 
-format `application/linkset+json` (section 4.2 of {{!RFC9264}}). 
-In addition, the Publisher MAY make additional formats available via 
-content negotiation (section 5.3 of {{!HTTP}}) to their 
-/.well-known/api-catalog location. A non-exhaustive list of such 
-formats that support the automated discovery, and machine (and 
-human) usage of a Publisher's APIs, is listed below.
+## API catalog contents
 
-The API catalog document MUST include hyperlinks to API endpoints, 
+The API catalog MUST include hyperlinks to API endpoints, 
 and is RECOMMENDED to include useful metadata, such as usage 
 policies, API version information, links to the OpenAPI Specification 
 [OAS] definitions for each API, etc. If the Publisher does not 
-include these metadata directly in the API catalog document, they 
+include that metadata directly in the API catalog document, they 
 SHOULD make that metadata available at the API endpoint URIs they 
 have listed (see {{api-catalog-example-linkset-bookmarks}} for 
-an example).
+an example). 
 
-Some suitable API catalog document formats include: 
+## API catalog formats
 
-* A Linkset in JSON Document format (section 4.2 of {{!RFC9264}}) of 
-API endpoints and information to facilitate API usage. The Linkset 
-SHOULD include a profile parameter (section 5 of {{!RFC9264}}) with 
-a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL' to indicate the 
-Linkset is representing an API catalog document as defined above. 
-Appendix A includes example API catalog documents based on the 
-Linkset format. 
-* An APIs.json document [APIsjson].
-* API bookmarks that represent an API entry-point URI, which may be 
-followed to discover purpose and usage.
-* A RESTDesc semantic description for hypermedia APIs [RESTdesc].
-* A Hypertext Application Language document [HAL].
-* An extension to the Schema.org WebAPI type [WebAPIext].
+The Publisher MUST publish the API catalog document in the Linkset 
+format `application/linkset+json` (section 4.2 of {{!RFC9264}}). 
+The Linkset SHOULD include a profile parameter (section 5 of
+{{!RFC9264}}) with a Profile URI {{!RFC7284}} value of 'THIS-RFC-URL'
+to indicate the Linkset is representing an API catalog document as
+defined above. Appendix A includes example API catalog documents 
+based on the Linkset format.
 
-If a Publisher already lists their APIs in a format other than 
-Linkset but wish to utilise the /.well-known/api-catalog URI, then:
+The Publisher MAY make additional formats available via 
+content negotiation (section 5.3 of {{!HTTP}}) to their 
+/.well-known/api-catalog location. A non-exhaustive list of such 
+formats that support the automated discovery, and machine (and 
+human) usage of a Publisher's APIs, is listed at
+{{api-catalog-other-formats}}. If a Publisher already lists their
+APIs in a format other than Linkset but wish to utilise the 
+/.well-known/api-catalog URI, then:
 
 * They MUST also implement a Linkset with, at minimum, hyperlinks to 
 API endpoints - see the example of 
@@ -711,6 +705,15 @@ Content-Type: application/linkset+json;
  ]
 }
 ~~~
+
+## Other API catalog formats {#api-catalog-other-formats}
+
+A non-exhaustive list of other API catalog document formats includes: 
+
+* An APIs.json document [APIsjson].
+* A RESTDesc semantic description for hypermedia APIs [RESTdesc].
+* A Hypertext Application Language document [HAL].
+* An extension to the Schema.org WebAPI type [WebAPIext].
 
 ## Nesting API catalog links {#api-catalog-example-linkset-nesting}
 
