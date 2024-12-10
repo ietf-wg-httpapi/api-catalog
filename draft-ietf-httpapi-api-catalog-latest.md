@@ -429,14 +429,14 @@ the framework provider should:
 in the API catalog. This metadata is likely to already exist in the 
 framework.
 * Determine which metadata to include in the API catalog, following 
-the requirements set out in {{#api-catalog-contents}} and the considerations 
+the requirements set out in {{api-catalog-contents}} and the considerations 
 set out in {{operations}}.
 * Map the chosen metadata to the format(s) described in 
-{{#api-catalog-formats}}. Where only the hyperlinks to APIs are to be 
+{{api-catalog-formats}}. Where only the hyperlinks to APIs are to be 
 included in the API catalog, then the structure suggested in 
 {{api-catalog-example-linkset-bookmarks}} may be followed. Where 
 possible the API catalog should include further metadata per the 
-guidance in {{#api-catalog-contents}}, in which case the structure suggested 
+guidance in {{api-catalog-contents}}, in which case the structure suggested 
 in {{api-catalog-example-linkset}} can be utilised and adapted 
 (ensuring compliance to {{!RFC9264}}) to reflect the nature of the 
 chosen metadata.
