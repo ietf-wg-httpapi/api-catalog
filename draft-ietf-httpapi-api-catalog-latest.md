@@ -223,7 +223,7 @@ directly, or via a request to
 `https://www.example.com/.well-known/api-catalog`, which the
 Publisher will resolve to `https://www.example.com/my_api_catalog`.
 
-## API catalog contents
+## API catalog contents {#api-catalog-contents}
 
 The API catalog MUST include hyperlinks to API endpoints, 
 and is RECOMMENDED to include useful metadata, such as usage 
@@ -234,7 +234,7 @@ SHOULD make that metadata available at the API endpoint URIs they
 have listed (see {{api-catalog-example-linkset-bookmarks}} for 
 an example). 
 
-## API catalog formats
+## API catalog formats {#api-catalog-formats}
 
 The Publisher MUST publish the API catalog document in the Linkset 
 format `application/linkset+json` (section 4.2 of {{!RFC9264}}). 
@@ -429,14 +429,14 @@ the framework provider should:
 in the API catalog. This metadata is likely to already exist in the 
 framework.
 * Determine which metadata to include in the API catalog, following 
-the requirements set out in {{api-catalog}} and the considerations 
+the requirements set out in {{#api-catalog-contents}} and the considerations 
 set out in {{operations}}.
 * Map the chosen metadata to the format(s) described in 
-{{api-catalog}}. Where only the hyperlinks to APIs are to be 
+{{#api-catalog-formats}}. Where only the hyperlinks to APIs are to be 
 included in the API catalog, then the structure suggested in 
 {{api-catalog-example-linkset-bookmarks}} may be followed. Where 
 possible the API catalog should include further metadata per the 
-guidance in {{api-catalog}}, in which case the structure suggested 
+guidance in {{#api-catalog-contents}}, in which case the structure suggested 
 in {{api-catalog-example-linkset}} can be utilised and adapted 
 (ensuring compliance to {{!RFC9264}}) to reflect the nature of the 
 chosen metadata.
@@ -573,7 +573,7 @@ specification YAML or JSON file).
 * "service-doc", used to link to API documentation that is primarily 
 intended for human consumption (an example of human-readable
 documentation is the IETF [Internet-Draft submission API
-instructions](https://datatracker.ietf.org/api/submission).
+instructions](https://datatracker.ietf.org/api/submission)).
 * "service-meta", used to link to additional metadata about the API, 
 and is primarily intended for machine consumption.
 * "status", used to link to the API status (e.g. API "health" 
