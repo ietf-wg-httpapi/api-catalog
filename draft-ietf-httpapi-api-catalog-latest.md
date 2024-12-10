@@ -113,7 +113,8 @@ Publisher's public API endpoints, along with metadata that describes
 the purpose and usage of each API, by specifying a well-known URI 
 that returns an API catalog document. The API catalog document is 
 primarily machine-readable to enable automated discovery and usage of
-APIs, and it may also include links to human-readable documentation.
+APIs, and it may also include links to human-readable documentation
+(see the example in {{api-catalog-example-rfc8615}}).
 
 Non-goals: this document does not mandate paths for API endpoints. 
 i.e., it does not mandate that my_example_api's endpoint should be
@@ -561,15 +562,18 @@ of scope of this document.
 This section is informative and provides and example of an API 
 catalog document using the Linkset format.
 
-## Using Linkset with RFC8615 relations
+## Using Linkset with RFC8615 relations {#api-catalog-example-rfc8615}
 
 This example uses the Linkset format {{!RFC9264}}, and the following 
 link relations defined in {{?RFC8631}}:
 
 * "service-desc", used to link to a description of the API that is 
-primarily intended for machine consumption.
+primarily intended for machine consumption (for example the [OAS]
+specification YAML or JSON file).
 * "service-doc", used to link to API documentation that is primarily 
-intended for human consumption.
+intended for human consumption (an example of human-readable
+documentation is the IETF [Internet-Draft submission API
+instructions](https://datatracker.ietf.org/api/submission).
 * "service-meta", used to link to additional metadata about the API, 
 and is primarily intended for machine consumption.
 * "status", used to link to the API status (e.g. API "health" 
@@ -766,7 +770,8 @@ Content-Type: application/linkset+json;
 # Acknowledgements
 
 Thanks to Jan Algermissen, Phil Archer, Tim Bray, Ben Bucksch, Sanjay 
-Dalal, David Dong, Mallory Knodel, Max Maton, Darrel Miller, Mark 
-Nottingham, Roberto Polli, Joey Salazar, Rich Salz, Herbert Van De 
-Sompel, Tina Tsou and Erik Wilde for their reviews, suggestions and 
-support.
+Dalal, David Dong, Erik Kline, Mallory Knodel, Murray Kucherawy, Max
+Maton, Darrel Miller, Mark Nottingham, Roberto Polli, Joey Salazar,
+Rich Salz, Herbert Van De Sompel, Oriel Steele, Tina Tsou,
+Gunter Van Der Velde, Éric Vyncke, and Erik Wilde for their reviews,
+suggestions and support.
