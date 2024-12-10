@@ -774,6 +774,6 @@ Content-Type: application/linkset+json;
 Thanks to Jan Algermissen, Phil Archer, Tim Bray, Ben Bucksch, Sanjay
 Dalal, David Dong, Erik Kline, Mallory Knodel, Murray Kucherawy, Max
 Maton, Darrel Miller, Mark Nottingham, Roberto Polli, Joey Salazar,
-Rich Salz, Herbert Van De Sompel, Oriel Steele, Tina Tsou,
+Rich Salz, Herbert Van De Sompel, Orie Steele, Tina Tsou,
 Gunter Van Der Velde, Eric Vyncke, and Erik Wilde for their reviews,
 suggestions and support.
