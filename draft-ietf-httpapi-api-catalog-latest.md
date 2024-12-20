@@ -174,7 +174,7 @@ in {{link-relation}}
 
 This document introduces a new link relation {{WEB-LINKING}}, 
 "api-catalog". This identifies a target resource that represents a
-list of APIs available from the Publisher of the context resource. 
+list of APIs available from the Publisher of the link context. 
 The target resource URI may be /.well-known/api-catalog , or any
 other URI chosen by the Publisher. For example, the Publisher
 'example' could include the api-catalog link relation in the HTTP
@@ -495,8 +495,8 @@ This specification registers the "api-catalog" link relation by
 following the procedures per section 2.1.1.1 of {{WEB-LINKING}}
 
 * Relation Name: api-catalog
-* Description: The link target identifies a resource that represents
-a list of APIs available from the Publisher of the context resource.
+* Description: Refers to a list of APIs available from the publisher
+of the link context.
 * Reference: THIS-RFC
 
 ## The api-catalog Profile URI
